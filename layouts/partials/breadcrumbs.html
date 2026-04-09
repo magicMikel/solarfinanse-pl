@@ -1,0 +1,29 @@
+{{/* Breadcrumbs visual */}}
+{{ if not .IsHome }}
+<nav aria-label="Breadcrumb" class="py-2">
+  <ol class="flex flex-wrap items-center gap-1 text-sm text-gray-500" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="{{ .Site.BaseURL }}" itemprop="item" class="hover:text-brand transition-colors">
+        <span itemprop="name">Strona główna</span>
+      </a>
+      <meta itemprop="position" content="1">
+    </li>
+    <li class="text-gray-300">/</li>
+    {{ if .IsPage }}
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="{{ .CurrentSection.Permalink }}" itemprop="item" class="hover:text-brand transition-colors">
+        <span itemprop="name">{{ .CurrentSection.Title }}</span>
+      </a>
+      <meta itemprop="position" content="2">
+    </li>
+    <li class="text-gray-300">/</li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-gray-700 font-medium truncate max-w-xs">
+      <span itemprop="name">{{ .Title }}</span>
+      <meta itemprop="position" content="3">
+    </li>
+    {{ else }}
+    <li class="text-gray-700 font-medium">{{ .Title }}</li>
+    {{ end }}
+  </ol>
+</nav>
+{{ end }}

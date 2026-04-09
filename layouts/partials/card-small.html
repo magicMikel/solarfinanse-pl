@@ -1,0 +1,19 @@
+<a href="{{ .Permalink }}" class="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg hover:border-brand transition-all flex flex-col">
+  {{ with .Params.image }}
+  <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+  {{ else }}
+  <div class="w-full h-44 bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center">
+    <span class="text-4xl">{{ .Params.icon | default "🌿" }}</span>
+  </div>
+  {{ end }}
+  <div class="p-4 flex flex-col flex-1">
+    {{ with .Params.kategoria }}
+    <span class="text-xs font-semibold text-brand uppercase tracking-wide mb-1">{{ . }}</span>
+    {{ end }}
+    <h3 class="font-bold text-gray-900 text-sm leading-snug group-hover:text-brand line-clamp-3 flex-1">{{ .Title }}</h3>
+    <div class="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
+      <span class="text-xs text-gray-400">{{ .PublishDate.Format "02.01.2006" }}</span>
+      <span class="text-xs font-medium text-brand">Czytaj →</span>
+    </div>
+  </div>
+</a>

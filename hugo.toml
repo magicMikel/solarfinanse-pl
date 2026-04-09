@@ -1,26 +1,99 @@
 baseURL = "https://solarfinanse.pl/"
 languageCode = "pl-PL"
-title = "Solar Finanse"
+title = "Solar Finanse – Koszty i Oszczędności na Fotowoltaice"
 defaultContentLanguage = "pl"
 enableRobotsTXT = true
+enableGitInfo = false
 summaryLength = 160
 [pagination]
   pagerSize = 12
+  path = "strona"
 copyright = "© 2026 solarfinanse.pl"
+
 [params]
-  siteName = "Solar Finanse"
-  siteDescription = "Finansowanie OZE dla rodzin i małych firm"
-  siteKeywords = "fotowoltaika koszty, kredyt na panele, leasing OZE, oszczędności"
-  author = "Redakcja Solar Finanse"
+  siteName = "SolarFinanse.pl"
+  siteDescription = "Praktyczny portal dla rodzin i małych firm planujących inwestycję w fotowoltaikę. Kalkulator oszczędności, kredyty, leasing OZE."
+  siteKeywords = "solar finanse, fotowoltaika koszty, kredyt panele, leasing OZE, oszczędności energia"
+  siteImage = "/img/og-default.jpg"
+  author = "Redakcja SolarFinanse.pl"
+  email = "redakcja@solarfinanse.pl"
+  googleAnalytics = ""
+  adsenseClient = "ca-pub-XXXXXXXXXX"
+  adsenseSlotArticle = "1234567890"
+  adsenseSlotSidebar = "0987654321"
+  twitterHandle = "@solarfinanse"
+  locale = "pl_PL"
   dateFormat = "2 January 2006"
+  dateFormatShort = "02.01.2006"
+
 [taxonomies]
   category = "kategorie"
   tag = "tagi"
+  author = "autorzy"
+
+[menu]
+  [[menu.main]]
+    name = "Aktualności"
+    url = "/aktualnosci/"
+    weight = 1
+  [[menu.main]]
+    name = "Dotacje"
+    url = "/dotacje/"
+    weight = 2
+  [[menu.main]]
+    name = "Poradniki"
+    url = "/poradniki/"
+    weight = 3
+  [[menu.main]]
+    name = "Artykuły"
+    url = "/posts/"
+    weight = 4
+  [[menu.footer]]
+    name = "O portalu"
+    url = "/o-portalu/"
+    weight = 1
+  [[menu.footer]]
+    name = "Kontakt"
+    url = "/kontakt/"
+    weight = 2
+  [[menu.footer]]
+    name = "Polityka prywatności"
+    url = "/polityka-prywatnosci/"
+    weight = 3
+
+[outputFormats]
+  [outputFormats.NewsSitemap]
+    mediaType = "application/xml"
+    baseName = "news-sitemap"
+    isPlainText = false
+    notAlternative = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON", "NewsSitemap"]
+  page = ["HTML"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    style = "monokai"
+
 [sitemap]
   changefreq = "daily"
   priority = 0.5
   filename = "sitemap.xml"
+
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false

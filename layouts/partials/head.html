@@ -1,0 +1,116 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+{{/* Title */}}
+{{ $title := .Title }}
+{{ if .IsHome }}
+  {{ $title = printf "%s – %s" .Site.Title .Site.Params.siteDescription }}
+{{ else if .Title }}
+  {{ $title = printf "%s | %s" .Title .Site.Params.siteName }}
+{{ end }}
+<title>{{ $title | truncate 70 }}</title>
+
+{{/* Meta Description */}}
+{{ $desc := .Params.description | default .Summary | default .Site.Params.siteDescription }}
+<meta name="description" content="{{ $desc | plainify | truncate 160 }}">
+
+{{/* Keywords */}}
+{{ with .Params.tags }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end }}
+
+{{/* Canonical */}}
+<link rel="canonical" href="{{ .Permalink }}">
+
+{{/* Robots */}}
+{{ if .Params.noindex }}<meta name="robots" content="noindex, nofollow">{{ else }}<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">{{ end }}
+
+{{/* Open Graph */}}
+{{ $ogImage := .Params.image | default .Site.Params.siteImage }}
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc | plainify | truncate 160 }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ .Site.Params.siteName }}">
+<meta property="og:locale" content="{{ .Site.Params.locale }}">
+{{ with $ogImage }}<meta property="og:image" content="{{ . | absURL }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">{{ end }}
+{{ if .IsPage }}
+  {{ with .PublishDate }}<meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+  {{ with .Lastmod }}<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+  {{ with .Params.author }}<meta property="article:author" content="{{ . }}">{{ end }}
+  {{ range .Params.tags }}<meta property="article:tag" content="{{ . }}">{{ end }}
+{{ end }}
+
+{{/* Twitter Cards */}}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="{{ .Site.Params.twitterHandle }}">
+<meta name="twitter:title" content="{{ $title | truncate 70 }}">
+<meta name="twitter:description" content="{{ $desc | plainify | truncate 160 }}">
+{{ with $ogImage }}<meta name="twitter:image" content="{{ . | absURL }}">{{ end }}
+
+{{/* Favicon */}}
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+
+{{/* Preconnect */}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+{{/* TailwindCSS via CDN (swap for Hugo Pipes/PostCSS in production) */}}
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: { DEFAULT: '#16a34a', dark: '#15803d', light: '#22c55e', muted: '#dcfce7' },
+          accent: '#f59e0b',
+        },
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          serif: ['Georgia', 'serif'],
+        }
+      }
+    }
+  }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+{{/* RSS */}}
+{{ range .AlternativeOutputFormats }}
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}">
+{{ end }}
+
+{{/* JSON-LD Structured Data */}}
+{{ if .IsHome }}{{ partial "schema-website.html" . }}{{ end }}
+{{ if .IsPage }}{{ partial "schema-article.html" . }}{{ end }}
+{{ if .IsSection }}{{ partial "schema-breadcrumb.html" . }}{{ end }}
+
+{{/* Google Analytics placeholder */}}
+{{ with .Site.Params.googleAnalytics }}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','{{ . }}');</script>
+{{ end }}
+
+<style>
+  .line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .line-clamp-3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .prose-custom h2{font-size:1.5rem;font-weight:700;margin:2rem 0 1rem;color:#111827;border-left:4px solid #16a34a;padding-left:0.75rem}
+  .prose-custom h3{font-size:1.2rem;font-weight:600;margin:1.5rem 0 0.75rem;color:#1f2937}
+  .prose-custom p{margin-bottom:1.25rem;line-height:1.8;color:#374151}
+  .prose-custom ul{list-style:disc;padding-left:1.5rem;margin-bottom:1.25rem}
+  .prose-custom ol{list-style:decimal;padding-left:1.5rem;margin-bottom:1.25rem}
+  .prose-custom li{margin-bottom:0.4rem;line-height:1.7}
+  .prose-custom a{color:#16a34a;text-decoration:underline}
+  .prose-custom a:hover{color:#15803d}
+  .prose-custom blockquote{border-left:4px solid #16a34a;background:#f0fdf4;padding:1rem 1.25rem;margin:1.5rem 0;color:#166534;font-style:italic}
+  .prose-custom table{width:100%;border-collapse:collapse;margin:1.5rem 0}
+  .prose-custom th{background:#16a34a;color:white;padding:0.75rem;text-align:left}
+  .prose-custom td{padding:0.75rem;border-bottom:1px solid #e5e7eb}
+  .prose-custom tr:nth-child(even) td{background:#f9fafb}
+  .toc-list{list-style:none;padding:0}
+  .toc-list li{padding:0.25rem 0;border-bottom:1px solid #f3f4f6}
+  .toc-list a{color:#16a34a;font-size:0.9rem}
+  .toc-list a:hover{color:#15803d;font-weight:600}
+</style>

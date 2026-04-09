@@ -1,0 +1,28 @@
+{{/* Schema.org: WebSite */}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ .Site.Params.siteName }}",
+  "url": "{{ .Site.BaseURL }}",
+  "description": "{{ .Site.Params.siteDescription }}",
+  "inLanguage": "pl-PL",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "{{ .Site.BaseURL }}search/?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Params.siteName }}",
+    "url": "{{ .Site.BaseURL }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ "/img/logo.png" | absURL }}"
+    }
+  }
+}
+</script>

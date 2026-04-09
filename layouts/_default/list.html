@@ -1,0 +1,37 @@
+{{ define "main" }}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  {{ partial "breadcrumbs.html" . }}
+
+  <div class="mt-4 mb-8">
+    <h1 class="text-3xl sm:text-4xl font-black text-gray-900">{{ .Title }}</h1>
+    {{ with .Description }}<p class="text-lg text-gray-500 mt-2">{{ . }}</p>{{ end }}
+  </div>
+
+  <div class="grid lg:grid-cols-3 gap-10">
+    <div class="lg:col-span-2">
+      {{/* Section intro content */}}
+      {{ with .Content }}
+      <div class="prose-custom mb-8 p-6 bg-green-50 rounded-2xl border border-green-100">
+        {{ . }}
+      </div>
+      {{ end }}
+
+      {{/* Articles grid */}}
+      {{ if .Pages }}
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {{ range .Pages }}
+        {{ partial "card-medium.html" . }}
+        {{ end }}
+      </div>
+
+      {{/* Pagination */}}
+      {{ partial "pagination.html" . }}
+      {{ end }}
+    </div>
+
+    <div class="lg:col-span-1">
+      {{ partial "sidebar.html" . }}
+    </div>
+  </div>
+</div>
+{{ end }}

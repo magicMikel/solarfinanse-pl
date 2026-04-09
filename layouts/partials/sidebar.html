@@ -1,0 +1,45 @@
+{{/* Sidebar */}}
+<aside class="space-y-8">
+
+  {{/* CTA Box */}}
+  <div class="bg-gradient-to-br from-brand to-brand-dark rounded-2xl p-5 text-white">
+    <p class="text-lg font-bold mb-2">🏡 Sprawdź dotację</p>
+    <p class="text-sm text-green-100 mb-4">Oblicz swoje dofinansowanie z programu Czyste Powietrze 2026.</p>
+    <a href="/dotacje/czyste-powietrze-2026/" class="block bg-white text-brand font-semibold text-sm text-center py-2.5 px-4 rounded-xl hover:bg-green-50 transition-colors">Sprawdź →</a>
+  </div>
+
+  {{/* Latest Posts */}}
+  <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+    <h3 class="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wide border-b pb-2">Najnowsze artykuły</h3>
+    <ul class="space-y-3">
+      {{ range first 6 (where .Site.RegularPages "Section" "ne" "") }}
+      <li class="flex gap-2 group">
+        <div class="w-1 h-full bg-brand rounded shrink-0 mt-1.5"></div>
+        <a href="{{ .Permalink }}" class="text-sm text-gray-700 group-hover:text-brand leading-snug line-clamp-2 transition-colors">{{ .Title }}</a>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+
+  {{/* Popular Tags */}}
+  <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+    <h3 class="font-bold text-gray-900 mb-4 text-sm uppercase tracking-wide border-b pb-2">Tagi</h3>
+    <div class="flex flex-wrap gap-2">
+      {{ range $name, $taxonomy := .Site.Taxonomies.tagi }}
+      <a href="{{ "/tagi/" | relURL }}{{ $name | urlize }}/" class="text-xs bg-green-50 text-brand hover:bg-brand hover:text-white px-3 py-1 rounded-full transition-colors font-medium">
+        {{ $name }} <span class="opacity-60">({{ len $taxonomy }})</span>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+
+  {{/* AdSense Sidebar */}}
+  {{ if .Site.Params.adsenseClient }}
+  <ins class="adsbygoogle" style="display:block" data-ad-client="{{ .Site.Params.adsenseClient }}" data-ad-slot="{{ .Site.Params.adsenseSlotSidebar }}" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  {{ else }}
+  <div class="bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center h-60 text-gray-400 text-xs">
+    [Reklama 300×250]
+  </div>
+  {{ end }}
+
+</aside>

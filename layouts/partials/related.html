@@ -1,0 +1,24 @@
+{{/* Related posts by tags */}}
+{{ $related := .Site.RegularPages.Related . | first 4 }}
+{{ with $related }}
+<section class="mt-10 pt-8 border-t border-gray-200">
+  <h2 class="text-xl font-bold text-gray-900 mb-5">📖 Powiązane artykuły</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    {{ range . }}
+    <a href="{{ .Permalink }}" class="group flex gap-3 p-3 bg-gray-50 rounded-lg hover:bg-green-50 hover:shadow-sm transition-all border border-transparent hover:border-brand">
+      {{ with .Params.image }}
+      <img src="{{ . }}" alt="{{ $.Title }}" class="w-20 h-16 object-cover rounded shrink-0" loading="lazy">
+      {{ else }}
+      <div class="w-20 h-16 bg-brand-muted rounded shrink-0 flex items-center justify-center">
+        <span class="text-brand text-2xl">🌿</span>
+      </div>
+      {{ end }}
+      <div class="min-w-0">
+        <p class="text-sm font-semibold text-gray-800 group-hover:text-brand line-clamp-2">{{ .Title }}</p>
+        <p class="text-xs text-gray-400 mt-1">{{ .PublishDate.Format "02.01.2006" }}</p>
+      </div>
+    </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

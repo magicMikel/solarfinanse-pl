@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased">
+  {{ partial "header.html" . }}
+  <main id="main-content">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+  {{ partial "scripts.html" . }}
+</body>
+</html>

@@ -1,0 +1,24 @@
+{{ printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  {{- $cutoff := now.AddDate 0 0 -2 }}
+  {{- $sections := slice "posts" "aktualnosci" }}
+  {{- range .Site.RegularPages }}
+  {{- if and (in $sections .Section) (gt .Date $cutoff) }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    <news:news>
+      <news:publication>
+        <news:name>{{ .Site.Title }}</news:name>
+        <news:language>pl</news:language>
+      </news:publication>
+      <news:publication_date>{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}</news:publication_date>
+      <news:title>{{ .Title | htmlEscape }}</news:title>
+      {{- with .Params.tags }}
+      <news:keywords>{{ delimit . ", " }}</news:keywords>
+      {{- end }}
+    </news:news>
+  </url>
+  {{- end }}
+  {{- end }}
+</urlset>

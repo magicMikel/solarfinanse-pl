@@ -1,0 +1,59 @@
+<footer class="bg-gray-900 text-gray-300 mt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {{/* Brand */}}
+      <div>
+        <a href="/" class="text-white text-xl font-black">CzystePowietrze<span class="text-brand">Dotacje</span>.pl</a>
+        <p class="mt-3 text-sm text-gray-400 leading-relaxed">Największy portal informacyjny o programie Czyste Powietrze, dotacjach OZE i dofinansowaniach do odnawialnych źródeł energii w Polsce.</p>
+        <div class="mt-4 flex gap-3">
+          <a href="#" class="text-gray-400 hover:text-brand transition-colors" aria-label="Facebook">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      {{/* Kategorie */}}
+      <div>
+        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Kategorie</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/dotacje/" class="hover:text-brand transition-colors">Dotacje i dofinansowania</a></li>
+          <li><a href="/poradniki/" class="hover:text-brand transition-colors">Poradniki OZE</a></li>
+          <li><a href="/aktualnosci/" class="hover:text-brand transition-colors">Aktualności</a></li>
+          <li><a href="/posts/" class="hover:text-brand transition-colors">Wszystkie artykuły</a></li>
+          <li><a href="/kategorie/fotowoltaika/" class="hover:text-brand transition-colors">Fotowoltaika</a></li>
+          <li><a href="/kategorie/pompa-ciepla/" class="hover:text-brand transition-colors">Pompy ciepła</a></li>
+        </ul>
+      </div>
+
+      {{/* Popularne */}}
+      <div>
+        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Popularne</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/dotacje/czyste-powietrze-2026/" class="hover:text-brand transition-colors">Czyste Powietrze 2026</a></li>
+          <li><a href="/poradniki/jak-zlozyc-wniosek-czyste-powietrze/" class="hover:text-brand transition-colors">Jak złożyć wniosek</a></li>
+          <li><a href="/dotacje/dofinansowanie-pompa-ciepla/" class="hover:text-brand transition-colors">Dotacje na pompę ciepła</a></li>
+          <li><a href="/poradniki/fotowoltaika-ile-kosztuje/" class="hover:text-brand transition-colors">Fotowoltaika – koszty</a></li>
+          <li><a href="/dotacje/moj-prad-6/" class="hover:text-brand transition-colors">Mój Prąd 6.0</a></li>
+        </ul>
+      </div>
+
+      {{/* Info */}}
+      <div>
+        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Informacje</h3>
+        <ul class="space-y-2 text-sm">
+          {{ range .Site.Menus.footer }}
+          <li><a href="{{ .URL }}" class="hover:text-brand transition-colors">{{ .Name }}</a></li>
+          {{ end }}
+        </ul>
+        <div class="mt-6 p-3 bg-gray-800 rounded-lg">
+          <p class="text-xs text-gray-400">Portal informacyjny. Nie świadczymy usług doradczych. Przed złożeniem wniosku skonsultuj się z doradcą energetycznym.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-gray-500">
+      <p>{{ .Site.Copyright }}</p>
+      <p>Strona nie jest oficjalnym serwisem rządowym. <a href="https://czystepowietrze.gov.pl" rel="nofollow noopener" target="_blank" class="text-brand hover:text-brand-light">Oficjalny portal Czyste Powietrze →</a></p>
+    </div>
+  </div>
+</footer>

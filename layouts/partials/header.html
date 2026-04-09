@@ -1,0 +1,56 @@
+<header class="bg-white shadow-sm sticky top-0 z-50 border-b-2 border-brand">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      {{/* Logo */}}
+      <a href="/" class="flex items-center gap-2 shrink-0" aria-label="{{ .Site.Params.siteName }} – strona główna">
+        <span class="text-brand text-2xl font-black tracking-tight leading-none">Czyste<span class="text-gray-800">Powietrze</span></span>
+        <span class="hidden sm:inline-block text-xs font-semibold bg-brand text-white px-2 py-0.5 rounded uppercase tracking-wider">Dotacje</span>
+      </a>
+
+      {{/* Desktop Nav */}}
+      <nav class="hidden lg:flex items-center gap-1" aria-label="Nawigacja główna">
+        {{ range .Site.Menus.main }}
+        <a href="{{ .URL }}" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-brand hover:bg-green-50 rounded-md transition-colors
+          {{ if (hasPrefix $.RelPermalink .URL) }} text-brand bg-green-50{{ end }}">
+          {{ .Name }}
+        </a>
+        {{ end }}
+        <a href="/dotacje/czyste-powietrze-2026/" class="ml-2 bg-brand text-white text-sm font-semibold px-4 py-2 rounded-full hover:bg-brand-dark transition-colors shadow-sm">
+          Złóż wniosek →
+        </a>
+      </nav>
+
+      {{/* Mobile hamburger */}}
+      <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-md text-gray-600 hover:text-brand" aria-label="Otwórz menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  {{/* Mobile Menu */}}
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-100 bg-white">
+    <div class="px-4 py-3 space-y-1">
+      {{ range .Site.Menus.main }}
+      <a href="{{ .URL }}" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand hover:bg-green-50 rounded-md">{{ .Name }}</a>
+      {{ end }}
+      <a href="/dotacje/czyste-powietrze-2026/" class="block mt-2 bg-brand text-white text-sm font-semibold px-4 py-2 rounded-full text-center">
+        Złóż wniosek →
+      </a>
+    </div>
+  </div>
+</header>
+
+{{/* Breaking news ticker */}}
+<div class="bg-brand text-white py-1.5 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 flex items-center gap-3">
+    <span class="shrink-0 bg-white text-brand text-xs font-bold px-2 py-0.5 rounded uppercase tracking-wide">Aktualności</span>
+    <div class="overflow-hidden">
+      <p class="text-sm whitespace-nowrap animate-[ticker_20s_linear_infinite]">
+        🌿 Czyste Powietrze 2026: nowe limity dofinansowania &nbsp;|&nbsp; 🔆 Fotowoltaika – rekordowe wnioski w Q1 2026 &nbsp;|&nbsp; 🏠 Termomodernizacja – zmiany od maja 2026 &nbsp;|&nbsp; 💰 Premia termomodernizacyjna: ile można dostać?
+      </p>
+    </div>
+  </div>
+</div>
+<style>
+@keyframes ticker { from{transform:translateX(100%)} to{transform:translateX(-100%)} }
+</style>

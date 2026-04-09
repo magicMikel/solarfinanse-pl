@@ -1,0 +1,25 @@
+<article class="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg hover:border-brand transition-all">
+  <a href="{{ .Permalink }}">
+    {{ with .Params.image }}
+    <img src="{{ . }}" alt="{{ $.Title }}" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+    {{ else }}
+    <div class="w-full h-52 bg-gradient-to-br from-green-100 to-green-300 flex items-center justify-center">
+      <span class="text-5xl">{{ .Params.icon | default "🌿" }}</span>
+    </div>
+    {{ end }}
+  </a>
+  <div class="p-5">
+    {{ with .Params.kategoria }}
+    <span class="text-xs font-bold text-brand uppercase tracking-widest">{{ . }}</span>
+    {{ end }}
+    <h3 class="text-lg font-bold text-gray-900 mt-1 leading-snug group-hover:text-brand line-clamp-2">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </h3>
+    <p class="text-sm text-gray-500 mt-2 line-clamp-3">{{ .Summary | plainify }}</p>
+    <div class="flex items-center gap-3 mt-4 pt-3 border-t border-gray-100 text-xs text-gray-400">
+      <span>{{ .PublishDate.Format "02.01.2006" }}</span>
+      {{ with .Params.author }}<span>· {{ . }}</span>{{ end }}
+      <a href="{{ .Permalink }}" class="ml-auto text-brand font-semibold hover:underline">Czytaj →</a>
+    </div>
+  </div>
+</article>

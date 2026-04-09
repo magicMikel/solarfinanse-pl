@@ -1,0 +1,14 @@
+{{/* Table of Contents */}}
+{{ if .Params.toc | default true }}
+{{ if gt (len .TableOfContents) 100 }}
+<div class="bg-green-50 border border-brand rounded-xl p-5 mb-8">
+  <h3 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
+    <svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h8M4 18h8"/></svg>
+    Spis treści
+  </h3>
+  <nav class="toc-list text-sm">
+    {{ .TableOfContents }}
+  </nav>
+</div>
+{{ end }}
+{{ end }}

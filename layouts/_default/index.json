@@ -1,0 +1,6 @@
+{{- $scratch := newScratch -}}
+{{ $scratch.Add "items" slice }}
+{{- range site.RegularPages -}}
+  {{- $scratch.Add "items" (dict "title" .Title "url" .RelPermalink "summary" (.Summary | plainify) "date" (.PublishDate.Format "2006-01-02") "section" .Section) -}}
+{{- end -}}
+{{ $scratch.Get "items" | jsonify }}

@@ -1,0 +1,84 @@
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  {{- /* Homepage – najwyższy priorytet */}}
+  {{- range where .Data.Pages "IsHome" true }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    <lastmod>{{ now.Format "2006-01-02" }}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  {{- end }}
+
+  {{- /* Evergreen dotacje – wysoki priorytet */}}
+  {{- range where .Data.Pages "Section" "dotacje" }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    {{- if not .Lastmod.IsZero }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02" }}</lastmod>
+    {{- end }}
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  {{- end }}
+
+  {{- /* Poradniki – wysoki priorytet evergreen */}}
+  {{- range where .Data.Pages "Section" "poradniki" }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    {{- if not .Lastmod.IsZero }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02" }}</lastmod>
+    {{- end }}
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  {{- end }}
+
+  {{- /* Posts – artykuły newsowe */}}
+  {{- range where .Data.Pages "Section" "posts" }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    {{- if not .Lastmod.IsZero }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02" }}</lastmod>
+    {{- end }}
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  {{- end }}
+
+  {{- /* Aktualności */}}
+  {{- range where .Data.Pages "Section" "aktualnosci" }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    {{- if not .Lastmod.IsZero }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02" }}</lastmod>
+    {{- end }}
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  {{- end }}
+
+  {{- /* Strony statyczne */}}
+  {{- range where (where .Data.Pages "Section" "") "Kind" "page" }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  {{- end }}
+
+  {{- /* Sekcje (index pages) – bez homepage */}}
+  {{- range where (where .Data.Pages "Kind" "section") "IsHome" false }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    {{- if not .Lastmod.IsZero }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02" }}</lastmod>
+    {{- end }}
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  {{- end }}
+
+</urlset>

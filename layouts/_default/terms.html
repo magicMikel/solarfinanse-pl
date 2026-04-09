@@ -1,0 +1,13 @@
+{{ define "main" }}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  {{ partial "breadcrumbs.html" . }}
+  <h1 class="text-3xl font-black text-gray-900 mt-4 mb-2">{{ .Title }}</h1>
+  <p class="text-gray-500 mb-8">{{ len .Pages }} artykułów z tą etykietą</p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {{ range .Pages }}
+    {{ partial "card-medium.html" . }}
+    {{ end }}
+  </div>
+  {{ partial "pagination.html" . }}
+</div>
+{{ end }}
