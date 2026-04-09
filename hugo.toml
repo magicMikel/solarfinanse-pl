@@ -1,0 +1,26 @@
+baseURL = "https://solarfinanse.pl/"
+languageCode = "pl-PL"
+title = "Solar Finanse"
+defaultContentLanguage = "pl"
+enableRobotsTXT = true
+summaryLength = 160
+[pagination]
+  pagerSize = 12
+copyright = "© 2026 solarfinanse.pl"
+[params]
+  siteName = "Solar Finanse"
+  siteDescription = "Finansowanie OZE dla rodzin i małych firm"
+  siteKeywords = "fotowoltaika koszty, kredyt na panele, leasing OZE, oszczędności"
+  author = "Redakcja Solar Finanse"
+  dateFormat = "2 January 2006"
+[taxonomies]
+  category = "kategorie"
+  tag = "tagi"
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+[sitemap]
+  changefreq = "daily"
+  priority = 0.5
+  filename = "sitemap.xml"
