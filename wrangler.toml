@@ -1,0 +1,12 @@
+name = "solarfinanse"
+compatibility_date = "2025-09-27"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "public"
+
+[build]
+command = "hugo --gc --minify"
+
+[vars]
+HUGO_VERSION = "0.159.1"
